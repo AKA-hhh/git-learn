@@ -964,6 +964,34 @@ dialog textarea { height:140px; font:13px/1.8 var(--mono); }
 .output-tip { color:var(--output-tip); }
 .help-command,.help-command-row { display:inline; }
 
+
+/* Repository reset template picker. */
+.reset-template-dialog{width:min(660px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:0;overflow:hidden;border-radius:12px}
+.reset-template-dialog[open]{display:flex;flex-direction:column}
+.reset-template-dialog .modal-head{flex:none;padding:17px 20px;align-items:flex-start}
+.reset-template-dialog .modal-head h2{font-size:20px;line-height:1.35}
+.reset-template-dialog .modal-head p{margin:3px 0 0;font-size:12px}
+.reset-template-body{min-height:0;padding:18px 20px 20px;overflow:auto}
+.reset-template-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0;padding:0;border:0}
+.reset-template-options legend{width:100%;margin:0 0 9px;padding:0;color:var(--muted);font-size:11px}
+.reset-template-option{position:relative;display:block!important;margin:0!important;cursor:pointer}
+.reset-template-option>input{position:absolute;z-index:2;top:15px;right:15px;width:16px;height:16px;margin:0;opacity:0;cursor:pointer}
+.reset-template-card{display:flex;min-height:150px;height:100%;flex-direction:column;padding:15px;border:1px solid var(--line);border-radius:8px;background:var(--soft);transition:border-color .16s,background .16s,box-shadow .16s,transform .16s}
+.reset-template-option:hover .reset-template-card{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));transform:translateY(-1px)}
+.reset-template-option>input:checked+.reset-template-card{border-color:var(--accent);background:var(--tint);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 14%,transparent)}
+.reset-template-option>input:focus-visible+.reset-template-card{outline:2px solid var(--accent);outline-offset:3px}
+.reset-template-choice{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.reset-template-choice strong{font-size:15px;line-height:1.4}
+.reset-template-choice i{width:16px;height:16px;flex:none;border:1px solid var(--line);border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 4px var(--surface)}
+.reset-template-option>input:checked+.reset-template-card .reset-template-choice i{border-color:var(--accent);background:var(--accent)}
+.reset-template-summary{display:block;margin-top:9px;color:var(--muted);font-size:12px;line-height:1.75}
+.reset-template-meta{display:flex;flex-wrap:wrap;gap:5px 8px;margin-top:auto;padding-top:12px;color:var(--muted);font:10px/1.5 var(--mono)}
+.reset-template-meta b{color:var(--accent);font-weight:700}
+.reset-template-preserved{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:12px;padding:9px 11px;border-left:2px solid var(--accent);background:var(--soft);font-size:11px}
+.reset-template-preserved strong{color:var(--accent);white-space:nowrap}
+.reset-template-preserved span{color:var(--muted);text-align:right}
+.reset-template-dialog .dialog-actions{margin-top:16px}
+@media(max-width:560px){.reset-template-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 20px);border-radius:10px}.reset-template-dialog .modal-head{padding:14px 16px}.reset-template-body{padding:14px 16px 16px}.reset-template-options{grid-template-columns:1fr;gap:9px}.reset-template-card{min-height:118px;padding:13px}.reset-template-preserved{align-items:flex-start;flex-direction:column;gap:3px}.reset-template-preserved span{text-align:left}.reset-template-dialog .dialog-actions{position:sticky;bottom:-16px;margin-left:-16px;margin-right:-16px;padding:12px 16px 0;background:var(--surface)}}
 </style>
 </head>
 <body>
@@ -1055,7 +1083,17 @@ dialog textarea { height:140px; font:13px/1.8 var(--mono); }
  </div>
 </dialog>
 
-<dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">重新开始这个实验？</h2><p id="reset-description">当前仓库、文件和命令记录会被替换。已完成的学习进度会保留。</p><div class="dialog-actions"><button data-close="reset-dialog">取消</button><button id="confirm-reset" class="primary">重新开始</button></div></dialog>
+<dialog id="reset-dialog" class="reset-template-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+ <div class="modal-head"><div><span class="eyebrow">STARTING POINT</span><h2 id="reset-title">选择重置模板</h2><p id="reset-description">当前文件、提交和命令历史将被替换。</p></div><button type="button" data-close="reset-dialog" aria-label="关闭重置模板选择">×</button></div>
+ <div class="reset-template-body">
+  <fieldset class="reset-template-options"><legend>从哪里重新开始</legend>
+   <label class="reset-template-option"><input id="reset-template-default" type="radio" name="reset-template" value="default" checked><span class="reset-template-card"><span class="reset-template-choice"><strong>默认模板</strong><i aria-hidden="true"></i></span><span class="reset-template-summary">带示例文件、两次提交和模拟远程，适合直接练习常用命令。</span><span class="reset-template-meta"><b>3</b> 工作区文件 <b>2</b> 提交 <b>1</b> 远程</span></span></label>
+   <label class="reset-template-option"><input id="reset-template-empty" type="radio" name="reset-template" value="empty"><span class="reset-template-card"><span class="reset-template-choice"><strong>空模板</strong><i aria-hidden="true"></i></span><span class="reset-template-summary">从未初始化的空目录开始，亲手完成 init、创建文件和首次提交。</span><span class="reset-template-meta"><b>0</b> 文件 <b>0</b> 提交 <b>0</b> 远程</span></span></label>
+  </fieldset>
+  <div class="reset-template-preserved"><strong>继续保留</strong><span>主题、学习进度、全局姓名与邮箱配置</span></div>
+  <div class="dialog-actions"><button type="button" data-close="reset-dialog">取消</button><button id="confirm-reset" type="button" class="primary">载入默认模板</button></div>
+ </div>
+</dialog>
 
 
 
@@ -2330,7 +2368,7 @@ Terminal.execute=function(line){
 Terminal.render=function(){
  const total=session.history.length,offset=Number.isInteger(session.terminalClearAt)?Math.max(0,Math.min(total,session.terminalClearAt)):0;
  const recent=session.history.slice(Math.max(offset,total-35));
- $('terminal-output').innerHTML=recent.map(e=>'<div class="terminal-entry"><div class="terminal-command">'+CommandColors.command(e.line)+'</div><pre class="'+(e.error?'terminal-error':'terminal-result')+'">'+CommandColors.output(e.output,e.error,e.line)+'</pre></div>').join('')||'<div class="terminal-empty"><span class="terminal-empty-mark" aria-hidden="true">❯_</span><p>'+(session.terminalClearAt!==undefined?'终端已清空':'从一条命令开始')+'</p><small>'+(session.terminalClearAt!==undefined?'历史记录保存在右上方「命令历史」。':'输入 git status，查看上方四区的文件状态。')+'</small></div>';
+ $('terminal-output').innerHTML=recent.map(e=>'<div class="terminal-entry"><div class="terminal-command">'+CommandColors.command(e.line)+'</div><pre class="'+(e.error?'terminal-error':'terminal-result')+'">'+CommandColors.output(e.output,e.error,e.line)+'</pre></div>').join('')||'<div class="terminal-empty"><span class="terminal-empty-mark" aria-hidden="true">❯_</span><p>'+(session.terminalClearAt!==undefined?'终端已清空':'从一条命令开始')+'</p><small>'+(session.terminalClearAt!==undefined?'历史记录保存在右上方「命令历史」。':sim.state.initialized?'输入 git status，查看上方四区的文件状态。':'输入 git init，初始化一个全新的仓库。')+'</small></div>';
  const output=$('terminal-output');output.scrollTop=output.scrollHeight;
  $('terminal-branch').textContent=sim.branch();$('terminal-branch').title='HEAD '+(sim.head()||'尚无提交');this.history();
 };
@@ -3429,6 +3467,31 @@ const HelpCommand={
  }
 };
 
+/* Reset templates: sample repository or a completely empty, uninitialized directory. */
+const ResetTemplates={
+ selected(){return document.querySelector('input[name="reset-template"]:checked')?.value||'default'},
+ update(){const empty=this.selected()==='empty';$('confirm-reset').textContent=empty?'载入空模板':'载入默认模板'},
+ clearView(file=''){
+  view.file=file;view.commit=null;view.remote='';view.graph={x:0,y:0,scale:1};view.historyIndex=0;view.historySelected=null;view.draft='';
+  $('command-input').value='';$('mobile-command-input').value='';$('history-search').value='';
+ },
+ open(){
+  $('reset-template-default').checked=true;this.update();$('reset-dialog').showModal();$('reset-template-default').focus({preventScroll:true});
+ },
+ empty(){
+  const globalConfig=structuredClone(sim.state.config.global),progress=structuredClone(session.progress),theme=session.theme;
+  const repo=GitSim.fresh(false);repo.config.global=globalConfig;
+  session={version:1,repo,scenario:'free',history:[],progress,theme,done:[],seen:{},baseline:0,baseReadme:'',last:'空模板已载入。先执行 git init 初始化仓库，或在工作区新建文件。'};
+  sim=new GitSim(repo);this.clearView();render();StateManager.save();notify('已载入空模板');
+ },
+ apply(){
+  const template=this.selected();$('reset-dialog').close();
+  if(template==='empty'){this.empty();return}
+  Scenarios.select('free');this.clearView('README.md');render();StateManager.save();
+ }
+};
+$('reset-dialog').addEventListener('change',event=>{if(event.target.name==='reset-template')ResetTemplates.update()});
+
 /* Event wiring: no inline handlers, user file content is always escaped. */
 $('command-form').addEventListener('submit',e=>{e.preventDefault();Terminal.execute($('command-input').value)});
 $('command-input').addEventListener('input',e=>{const tokens=e.target.value.trim().split(/\s+/);Learning.contextual(tokens[0]==='git'?tokens[1]:tokens[0]);renderStatus()});
@@ -3436,8 +3499,8 @@ $('command-input').addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key===
 $('history-search').addEventListener('input',()=>Terminal.history());$('reference-search').addEventListener('input',()=>Learning.reference());$('lesson-search').addEventListener('input',()=>Learning.lessons());
 
 $('theme-toggle').onclick=()=>{session.theme=session.theme==='dark'?'light':'dark';render();StateManager.save()};
-$('reset-repo').onclick=()=>{pendingScene='free';$('reset-title').textContent='重新开始这个实验？';$('reset-dialog').showModal()};
-$('confirm-reset').onclick=()=>{$('reset-dialog').close();Scenarios.select(pendingScene)};
+$('reset-repo').onclick=()=>ResetTemplates.open();
+$('confirm-reset').onclick=()=>ResetTemplates.apply();
 $('zones').addEventListener('input',e=>{if(e.target.id==='working-editor')FourZones.edited(e.target.value)});
 $('zones').addEventListener('change',e=>{if(e.target.id==='remote-select'){view.remote=e.target.value;FourZones.render()}});
 $('zones').addEventListener('keydown',e=>{if(e.target.id==='working-editor'&&(e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();StateManager.save();notify('工作区已保存；使用 git add 暂存修改')}});
