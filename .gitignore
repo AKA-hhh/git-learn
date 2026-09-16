@@ -1,0 +1,35 @@
+# Local implementation and QA workspace
+.work/
+
+# Dependencies
+node_modules/
+
+# Test and coverage output
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+*.local
+
+# Editor settings
+.idea/
+.vscode/
+*.code-workspace
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
