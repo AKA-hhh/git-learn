@@ -1,0 +1,11 @@
+{
+  "name": "git-atlas-tests",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "test:browser": "node browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

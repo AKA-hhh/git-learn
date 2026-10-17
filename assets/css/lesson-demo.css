@@ -1,0 +1,892 @@
+    /* A wider canvas and a contained command demonstration inside each lesson. */
+    .app {
+      width: 100%;
+      max-width: none
+    }
+
+    @media(min-width:981px) {
+      .app {
+        padding-left: 12px !important;
+        padding-right: 12px !important
+      }
+
+      .app-header {
+        padding-left: 12px;
+        padding-right: 12px
+      }
+    }
+
+    #lessons-dialog {
+      width: min(1380px, calc(100vw - 24px));
+      max-width: calc(100vw - 24px);
+      height: min(920px, calc(100dvh - 28px));
+      max-height: calc(100dvh - 28px)
+    }
+
+    #lessons-dialog>#lessons-panel.lessons-library {
+      grid-template-columns: 206px minmax(0, 1fr)
+    }
+
+    #lessons-dialog #lessons {
+      padding: 22px 26px 26px
+    }
+
+    #lessons-dialog .lesson-article {
+      max-width: 1120px
+    }
+
+    #lessons-dialog .lesson-article-head {
+      padding-bottom: 14px;
+      margin-bottom: 17px
+    }
+
+    #lessons-dialog .lesson-article h3 {
+      font-size: 25px
+    }
+
+    #lessons-dialog .lesson-lead {
+      max-width: 820px
+    }
+
+    #lessons-dialog .lesson-demo {
+      margin: 0 0 24px;
+      border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
+      border-radius: 12px;
+      background: var(--soft);
+      padding: 16px;
+      overflow: hidden;
+      min-width: 0
+    }
+
+    #lessons-dialog .demo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 13px
+    }
+
+    #lessons-dialog .demo-header .eyebrow {
+      font-size: 9px;
+      letter-spacing: 1.5px
+    }
+
+    #lessons-dialog .demo-header h4 {
+      margin: 2px 0 0;
+      font-size: 16px;
+      color: var(--ink)
+    }
+
+    .demo-independent {
+      font-size: 10px;
+      color: var(--accent);
+      padding: 3px 7px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface)
+    }
+
+    .demo-example-picker,
+    .demo-file-picker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0
+    }
+
+    .demo-example-picker label,
+    .demo-file-picker label {
+      margin: 0;
+      flex: none;
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    .demo-example-picker select {
+      padding: 6px 28px 6px 10px;
+      font-size: 12px;
+      flex: 1;
+      max-width: 440px;
+      min-width: 0;
+      border-color: var(--line)
+    }
+
+    #lessons-dialog .demo-description {
+      font-size: 12px;
+      line-height: 1.85;
+      color: var(--muted);
+      margin: 8px 0 12px
+    }
+
+    .demo-step-list {
+      display: flex;
+      gap: 5px;
+      overflow: auto;
+      padding: 1px 1px 5px;
+      margin-bottom: 8px;
+      scrollbar-width: none
+    }
+
+    .demo-step-list::-webkit-scrollbar {
+      display: none
+    }
+
+    .demo-step-list button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: none;
+      padding: 5px 8px;
+      font: 10px/1.6 var(--mono);
+      border-color: transparent;
+      background: transparent;
+      color: var(--muted)
+    }
+
+    .demo-step-list button b {
+      font-weight: 500;
+      font-size: 9px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      width: 22px;
+      line-height: 21px
+    }
+
+    .demo-step-list button[aria-current] {
+      background: var(--tint);
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 35%, var(--line))
+    }
+
+    .demo-step-list button[aria-current] b {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--surface)
+    }
+
+    #lessons-dialog .lesson-demo>.resource-code-card {
+      margin: 0;
+      border-radius: 8px
+    }
+
+    #lessons-dialog .lesson-demo>.resource-code-card .resource-code-head {
+      min-height: 27px;
+      padding: 4px 11px
+    }
+
+    #lessons-dialog .lesson-demo>.resource-code-card .resource-code {
+      padding: 10px 13px;
+      font-size: 12px;
+      line-height: 1.8
+    }
+
+    .demo-edit-action {
+      padding: 10px 12px;
+      background: var(--surface);
+      border: 1px dashed var(--accent);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .demo-edit-action span {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .demo-edit-action strong {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent)
+    }
+
+    .demo-operation-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0 7px
+    }
+
+    .demo-phase-toggle {
+      display: flex;
+      gap: 2px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 3px
+    }
+
+    .demo-phase-toggle button {
+      font-size: 11px;
+      padding: 4px 12px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 4px
+    }
+
+    .demo-phase-toggle button[aria-pressed=true] {
+      background: var(--tint);
+      color: var(--accent);
+      font-weight: 600
+    }
+
+    .demo-step-count {
+      font: 10px var(--mono);
+      color: var(--muted);
+      margin-left: auto
+    }
+
+    .demo-run {
+      font-size: 11px;
+      background: var(--accent);
+      color: var(--surface);
+      padding: 7px 13px;
+      border-color: var(--accent)
+    }
+
+    .demo-run:hover {
+      background: color-mix(in srgb, var(--accent) 92%, var(--ink));
+      color: var(--surface)
+    }
+
+    #lessons-dialog .demo-outcome {
+      min-height: 20px;
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--accent);
+      margin: 0 0 10px;
+      overflow-wrap: anywhere
+    }
+
+    .demo-file-picker {
+      margin-bottom: 9px
+    }
+
+    .demo-file-picker select {
+      font: 11px/1.5 var(--mono);
+      padding: 5px 8px;
+      flex: 1;
+      max-width: 280px
+    }
+
+    .demo-file-picker>span {
+      margin-left: auto;
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .demo-zones {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px
+    }
+
+    .demo-zone {
+      --zone-accent: var(--accent);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 2px solid var(--zone-accent);
+      border-radius: 7px;
+      overflow: hidden
+    }
+
+    .demo-zone[data-demo-zone=working] {
+      --zone-accent: var(--orange)
+    }
+
+    .demo-zone[data-demo-zone=index] {
+      --zone-accent: var(--gold)
+    }
+
+    .demo-zone[data-demo-zone=remote] {
+      --zone-accent: var(--purple)
+    }
+
+    .demo-zone header {
+      display: flex;
+      gap: 5px;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 9px 9px 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink)
+    }
+
+    .demo-zone header small {
+      font-size: 9px;
+      font-weight: 400;
+      white-space: nowrap;
+      color: var(--muted)
+    }
+
+    .demo-zone-status {
+      padding: 0 9px 8px;
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 9px;
+      color: var(--muted);
+      min-height: 25px
+    }
+
+    .demo-zone-status b {
+      font-weight: 500;
+      color: var(--zone-accent);
+      white-space: nowrap
+    }
+
+    .demo-zone-changed {
+      border-color: color-mix(in srgb, var(--zone-accent) 60%, var(--line));
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--zone-accent) 15%, transparent)
+    }
+
+    #lessons-dialog pre.demo-file-content {
+      margin: 0;
+      flex: 1;
+      min-height: 76px;
+      max-height: 155px;
+      overflow: auto;
+      padding: 8px 0;
+      background: var(--soft);
+      border: 0;
+      border-radius: 0;
+      color: var(--ink);
+      font: 11px/1.8 var(--mono);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      scrollbar-width: none
+    }
+
+    pre.demo-file-content::-webkit-scrollbar {
+      display: none
+    }
+
+    .demo-file-content code {
+      font: inherit;
+      color: inherit;
+      background: transparent;
+      padding: 0
+    }
+
+    .demo-content-line {
+      display: block;
+      padding: 0 9px;
+      min-height: 19px
+    }
+
+    .demo-content-line.is-new {
+      background: color-mix(in srgb, var(--accent) 13%, transparent);
+      color: var(--accent)
+    }
+
+    .demo-no-file {
+      font-size: 10px;
+      line-height: 1.8;
+      color: var(--muted);
+      padding: 12px 9px;
+      min-height: 76px;
+      flex: 1;
+      background: repeating-linear-gradient(135deg, var(--soft), var(--soft) 5px, var(--surface) 5px, var(--surface) 6px)
+    }
+
+    .demo-zone footer {
+      font-size: 9px;
+      color: var(--muted);
+      padding: 6px 9px;
+      border-top: 1px solid var(--line)
+    }
+
+    .demo-zone-changed footer {
+      color: var(--zone-accent)
+    }
+
+    #lessons-dialog .demo-reason {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 10px;
+      padding: 11px 0;
+      margin: 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .demo-reason strong {
+      font-size: 11px;
+      color: var(--ink);
+      font-weight: 600
+    }
+
+    #lessons-dialog .demo-reason p {
+      font-size: 11px;
+      line-height: 1.85;
+      color: var(--muted);
+      margin: 0
+    }
+
+    .demo-reason .inline-command {
+      font-size: 10px !important;
+      white-space: normal
+    }
+
+    .demo-graph-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin: 11px 0 4px
+    }
+
+    .demo-graph-heading strong {
+      font-size: 11px;
+      font-weight: 600
+    }
+
+    .demo-graph-heading>span {
+      font-size: 9px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px
+    }
+
+    .demo-graph-heading i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--graph-head)
+    }
+
+    .demo-graph {
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      scrollbar-width: none
+    }
+
+    .demo-graph::-webkit-scrollbar {
+      display: none
+    }
+
+    .demo-graph svg {
+      display: block;
+      width: 100%;
+      max-width: none
+    }
+
+    .demo-graph text {
+      font: 10px var(--mono);
+      fill: var(--muted)
+    }
+
+    .demo-graph .demo-graph-ref {
+      font-size: 9px;
+      fill: var(--accent)
+    }
+
+    .demo-graph .demo-graph-message {
+      font-size: 10px;
+      fill: var(--ink)
+    }
+
+    .demo-head-halo {
+      fill: var(--graph-head-halo)
+    }
+
+    .demo-graph-empty {
+      font-size: 11px;
+      color: var(--muted);
+      padding: 21px 12px;
+      text-align: center
+    }
+
+    .demo-details {
+      margin-top: 9px;
+      border-top: 1px solid var(--line);
+      padding-top: 8px
+    }
+
+    .demo-details summary {
+      font-size: 11px;
+      color: var(--muted);
+      cursor: pointer;
+      width: fit-content
+    }
+
+    .demo-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 20px;
+      padding: 10px 0 2px
+    }
+
+    .demo-facts>div {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0
+    }
+
+    .demo-facts span {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .demo-facts strong {
+      font: 500 11px/1.7 var(--mono);
+      color: var(--ink);
+      overflow-wrap: anywhere
+    }
+
+    .demo-output pre {
+      margin-top: 9px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      max-height: 180px;
+      overflow: auto;
+      scrollbar-width: none;
+      font: 11px/1.8 var(--mono);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere
+    }
+
+    .demo-output code {
+      font: inherit
+    }
+
+    .demo-output pre::-webkit-scrollbar {
+      display: none
+    }
+
+    #lessons-dialog .demo-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 13px;
+      border-top: 1px solid var(--line);
+      padding-top: 11px
+    }
+
+    .demo-footer button {
+      font-size: 10px;
+      padding: 5px 8px
+    }
+
+    .demo-footer span {
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center
+    }
+
+    .demo-footer button:disabled {
+      opacity: .45
+    }
+
+    .lesson-checkpoints {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0 0 25px
+    }
+
+    .lesson-checkpoint {
+      border-left: 2px solid var(--line);
+      padding: 0 12px;
+      min-width: 0
+    }
+
+    .lesson-checkpoint strong {
+      font-size: 12px;
+      color: var(--ink)
+    }
+
+    #lessons-dialog .lesson-checkpoint p {
+      font-size: 12px;
+      line-height: 1.85;
+      color: var(--muted);
+      margin: 5px 0 0
+    }
+
+    #lessons-dialog .lesson-code-description {
+      margin: 0;
+      padding: 11px 14px;
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.85
+    }
+
+    #lessons-dialog .lesson-code-description .inline-command {
+      background: var(--surface);
+      color: var(--accent)
+    }
+
+    #lessons-dialog .lesson-commands {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      align-items: start
+    }
+
+    #lessons-dialog .lesson-code-block {
+      height: 100%;
+      display: flex;
+      flex-direction: column
+    }
+
+    #lessons-dialog .lesson-code-block .lesson-code-description {
+      flex: 1
+    }
+
+    .lesson-demo :is(select, button, summary):focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    .demo-graph:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    @media(max-width:1100px) {
+      #lessons-dialog>#lessons-panel.lessons-library {
+        grid-template-columns: 190px minmax(0, 1fr)
+      }
+
+      #lessons-dialog #lessons {
+        padding: 20px
+      }
+
+      .demo-zones {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      #lessons-dialog .lesson-commands {
+        grid-template-columns: 1fr
+      }
+
+      .lesson-checkpoints {
+        grid-template-columns: 1fr;
+        gap: 14px
+      }
+    }
+
+    @media(max-width:700px) {
+      #lessons-dialog {
+        width: calc(100vw - 16px);
+        max-width: calc(100vw - 16px);
+        height: calc(100dvh - 16px);
+        max-height: calc(100dvh - 16px)
+      }
+
+      #lessons-dialog>#lessons-panel.lessons-library {
+        grid-template-columns: minmax(0, 1fr)
+      }
+
+      #lessons-dialog #lessons {
+        padding: 16px 12px
+      }
+
+      #lessons-dialog .lesson-demo {
+        padding: 11px;
+        border-radius: 9px
+      }
+
+      .demo-header {
+        align-items: flex-start !important
+      }
+
+      .demo-independent {
+        font-size: 9px;
+        max-width: 92px;
+        text-align: center
+      }
+
+      .demo-example-picker {
+        gap: 7px
+      }
+
+      .demo-example-picker label {
+        font-size: 10px
+      }
+
+      .demo-example-picker select {
+        font-size: 11px;
+        padding-left: 7px
+      }
+
+      .demo-operation-row {
+        gap: 5px
+      }
+
+      .demo-phase-toggle button {
+        padding: 4px 9px;
+        font-size: 10px
+      }
+
+      .demo-run {
+        padding: 7px 9px;
+        font-size: 10px
+      }
+
+      .demo-step-count {
+        font-size: 9px
+      }
+
+      .demo-file-picker {
+        flex-wrap: wrap;
+        gap: 5px
+      }
+
+      .demo-file-picker label {
+        font-size: 10px
+      }
+
+      .demo-file-picker>span {
+        display: none
+      }
+
+      .demo-file-picker select {
+        max-width: none
+      }
+
+      .demo-zones {
+        gap: 6px
+      }
+
+      .demo-zone header {
+        font-size: 11px;
+        padding: 8px 7px 4px
+      }
+
+      .demo-zone-status {
+        padding-left: 7px;
+        padding-right: 7px;
+        font-size: 8px
+      }
+
+      .demo-content-line {
+        padding: 0 7px
+      }
+
+      #lessons-dialog pre.demo-file-content {
+        font-size: 10px
+      }
+
+      .demo-zone footer {
+        font-size: 8px;
+        padding: 5px 7px
+      }
+
+      .demo-no-file {
+        font-size: 9px
+      }
+
+      #lessons-dialog .demo-reason {
+        grid-template-columns: 1fr;
+        gap: 3px
+      }
+
+      .demo-footer span {
+        font-size: 9px
+      }
+
+      .demo-footer button {
+        font-size: 9px;
+        padding: 5px
+      }
+
+      .demo-facts {
+        grid-template-columns: 1fr
+      }
+
+      .demo-footer {
+        flex-wrap: wrap
+      }
+
+      .demo-footer span {
+        order: 3;
+        flex-basis: 100%
+      }
+
+      .demo-graph svg {
+        height: auto
+      }
+
+      .lesson-checkpoints {
+        gap: 12px
+      }
+
+      #lessons-dialog .lesson-article-head {
+        margin-bottom: 14px
+      }
+
+      .lesson-checkpoint {
+        padding-left: 10px
+      }
+    }
+
+    @media(prefers-reduced-motion:no-preference) {
+      .demo-zone-changed {
+        animation: demo-appear .32s ease-out
+      }
+
+      @keyframes demo-appear {
+        from {
+          background: var(--tint);
+          transform: translateY(2px)
+        }
+
+        to {
+          background: var(--surface);
+          transform: translateY(0)
+        }
+      }
+    }
+
+
+    :root {
+      --output-title: #75510e;
+      --output-annotation: #76501d;
+      --output-tip: #496958;
+    }
+
+    [data-theme="dark"],
+    .terminal,
+    #history-dialog .resource-code-card {
+      --output-title: #f2d27d;
+      --output-annotation: #e1b978;
+      --output-tip: #a8c4ae;
+    }
+
+    .output-title {
+      color: var(--output-title);
+      font-weight: 700;
+    }
+
+    .output-annotation {
+      color: var(--output-annotation);
+    }
+
+    .output-tip {
+      color: var(--output-tip);
+    }
+
+    .help-command,
+    .help-command-row {
+      display: inline;
+    }
+
+
