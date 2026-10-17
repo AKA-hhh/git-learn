@@ -1,0 +1,40 @@
+    /* Event wiring: no inline handlers, user file content is always escaped. */
+    $('command-form').addEventListener('submit', e => {e.preventDefault(); Terminal.execute($('command-input').value)});
+    $('command-input').addEventListener('input', e => {const tokens = e.target.value.trim().split(/\s+/); Learning.contextual(tokens[0] === 'git' ? tokens[1] : tokens[0]); renderStatus()});
+    $('command-input').addEventListener('keydown', e => {if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {e.preventDefault(); if (view.historyIndex === session.history.length) view.draft = e.target.value; view.historyIndex = Math.max(0, Math.min(session.history.length, view.historyIndex + (e.key === 'ArrowUp' ? -1 : 1))); e.target.value = view.historyIndex === session.history.length ? view.draft : session.history[view.historyIndex]?.line || ''} if (e.key === 'Tab') {const m = e.target.value.match(/^(?:git\s+)?([a-z]+)$/); if (m) {const matches = REFERENCES.filter(r => r.name.startsWith(m[1])); if (matches.length === 1) {e.preventDefault(); Terminal.fill('git ' + matches[0].name + ' ')} } } });
+    $('history-search').addEventListener('input', () => Terminal.history()); $('reference-search').addEventListener('input', () => Learning.reference()); $('lesson-search').addEventListener('input', () => Learning.lessons());
+
+    $('theme-toggle').onclick = () => {session.theme = session.theme === 'dark' ? 'light' : 'dark'; render(); StateManager.save()};
+    $('reset-repo').onclick = () => ResetTemplates.open();
+    $('confirm-reset').onclick = () => ResetTemplates.apply();
+    $('zones').addEventListener('input', e => {if (e.target.id === 'working-editor') FourZones.edited(e.target.value)});
+    $('zones').addEventListener('change', e => {if (e.target.id === 'remote-select') {view.remote = e.target.value; FourZones.render()} });
+    $('zones').addEventListener('keydown', e => {if (e.target.id === 'working-editor' && (e.ctrlKey || e.metaKey) && e.key === 's') {e.preventDefault(); StateManager.save(); notify('工作区已保存；使用 git add 暂存修改')} });
+    $('file-form').addEventListener('submit', e => {e.preventDefault(); const p = $('file-path').value.trim().replace(/^\.\//, ''); if (!p || /[\x00-\x1f\\:]/.test(p) || p.split('/').some(v => !v || ['.', '..', '.git', '__proto__', 'prototype', 'constructor'].includes(v))) {$('file-error').textContent = '请输入有效的仓库内相对路径，例如 src/hello.js。'; return } if (Object.keys(sim.state.workingTree).some(k => k === p || k.startsWith(p + '/') || p.startsWith(k + '/'))) {$('file-error').textContent = '这个文件或目录路径已被占用。'; return } sim.state.workingTree[p] = $('file-content').value; view.file = p; FileTree.reveal(p); session.last = '已创建 ' + p + '。它目前只在工作区中，需要 git add 才会被跟踪。'; Scenarios.update('edit'); $('file-dialog').close(); render(); StateManager.save(); $('working-editor')?.focus()});
+    document.addEventListener('click', e => {const b = e.target.closest('button'); if (!b) return; if (b.dataset.fill) {b.closest('dialog')?.close(); Terminal.fill(b.dataset.fill)} if (b.dataset.file) FileModal.open(b.dataset.file, b.closest('.zone')?.dataset.zone || 'working'); if (b.dataset.edit) FileModal.open(b.dataset.edit, 'working'); if (b.dataset.reference) {view.reference = b.dataset.reference; Learning.contextual(b.dataset.reference); Learning.reference(); renderStatus(); $('ref-tab-' + view.reference)?.focus({preventScroll: true})} if (b.dataset.chapter) {view.chapter = b.dataset.chapter; Learning.lessons(); $('lesson-tab-' + view.chapter)?.focus({preventScroll: true})} if (b.dataset.replay !== undefined) Terminal.execute(session.history[Number(b.dataset.replay)].line); if (b.dataset.copy !== undefined) copyCommand(session.history[Number(b.dataset.copy)].line); if (b.dataset.close) $(b.dataset.close).close(); if (b.dataset.learn) {const id = b.dataset.learn; if (!session.progress.lessons.includes(id)) session.progress.lessons.push(id); Learning.lessons(); StateManager.save()} if (b.id === 'new-file') {$('file-form').reset(); $('file-error').textContent = ''; $('file-dialog').showModal(); $('file-path').focus()} if (b.id === 'delete-file') {delete sim.state.workingTree[view.file]; session.last = '已从工作区删除 ' + view.file + '。git add . 可暂存删除；已跟踪文件可用 git restore 恢复。'; Scenarios.update('edit'); render(); StateManager.save()} });
+    $('graph-plus').onclick = () => BranchGraph.zoom(1.2); $('graph-minus').onclick = () => BranchGraph.zoom(1 / 1.2); $('graph-fit').onclick = () => {view.graph = {x: 0, y: 0, scale: 1}; BranchGraph.transform()};
+    let drag = null, wasDragged = false, openedOnPointerUp = false;
+    $('graph').addEventListener('pointerdown', e => {if (e.button !== 0) return; openedOnPointerUp = false; drag = {x: e.clientX, y: e.clientY, ox: view.graph.x, oy: view.graph.y, node: e.target.closest('[data-commit]')?.dataset.commit}; wasDragged = false; $('graph').setPointerCapture(e.pointerId)});
+    $('graph').addEventListener('pointermove', e => {if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 4) wasDragged = true; if (wasDragged) {view.graph.x = drag.ox + dx; view.graph.y = drag.oy + dy; BranchGraph.transform()} });
+    $('graph').addEventListener('pointerup', e => {const selected = drag?.node; drag = null; if ($('graph').hasPointerCapture(e.pointerId)) $('graph').releasePointerCapture(e.pointerId); if (selected && !wasDragged) {openedOnPointerUp = true; CommitInspector.open(selected)} }); $('graph').addEventListener('pointercancel', () => {drag = null; wasDragged = true; openedOnPointerUp = false});
+    $('graph').addEventListener('click', e => {if (openedOnPointerUp) {openedOnPointerUp = false; return } if (wasDragged) return; const node = e.target.closest('[data-commit]'); if (node) CommitInspector.open(node.dataset.commit)});
+    $('graph').addEventListener('keydown', e => {if (e.key === 'Enter' || e.key === ' ') {const node = e.target.closest('[data-commit]'); if (node) {e.preventDefault(); CommitInspector.open(node.dataset.commit)} } });
+    $('graph').addEventListener('wheel', e => {e.preventDefault(); BranchGraph.zoom(e.deltaY < 0 ? 1.12 : 1 / 1.12)}, {passive: false});
+    window.addEventListener('pagehide', () => StateManager.save());
+    session = StateManager.load() || Scenarios.create('free'); sim = new GitSim(session.repo); view.historyIndex = session.history.length; render(); if (StateManager.notice) notify(StateManager.notice); StateManager.save();
+    window.GitAtlas = {get simulator() {return sim}, get session() {return session} };
+
+
+    $('open-reference').onclick = () => {$('reference-dialog').showModal(); $('reference-search').focus(); Learning.reference()}; $('open-lessons').onclick = () => {$('lessons-dialog').showModal(); $('lesson-search').focus(); Learning.lessons()}; $('open-history').onclick = () => {$('history-dialog').showModal(); $('history-search').focus()}; const mi = $('mobile-command-input'); $('mobile-command-form').addEventListener('submit', e => {e.preventDefault(); Terminal.execute(mi.value)}); mi.addEventListener('input', e => {$('command-input').value = e.target.value; Learning.contextual((e.target.value.trim().split(/\s+/)[0] === 'git' ? e.target.value.trim().split(/\s+/)[1] : e.target.value.trim().split(/\s+/)[0]));});
+
+    $('reference-chips').addEventListener('keydown', e => {
+      const tab = e.target.closest('[role="tab"]'); if (!tab) return;
+      const keys = ['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End']; if (!keys.includes(e.key)) return;
+      e.preventDefault(); const tabs = [...$('reference-chips').querySelectorAll('[role="tab"]')], i = tabs.indexOf(tab);
+      const next = e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : (i + (e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 1) + tabs.length) % tabs.length;
+      tabs[next].click(); $('ref-tab-' + view.reference)?.scrollIntoView({block: 'nearest', inline: 'nearest'});
+    });
+
+    RepositoryInfo.init();
+
+  

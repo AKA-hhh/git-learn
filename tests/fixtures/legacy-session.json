@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "repo": {
+    "initialized": true,
+    "config": {
+      "global": {
+        "user.name": "Git Learner",
+        "user.email": "learner@example.com"
+      },
+      "local": {}
+    },
+    "workingTree": {
+      "README.md": "<<<<<<< HEAD\n# Hello, Git\n\n来自 main：让版本看得见。\n\n=======\n# Hello, Git\n\n来自 feature：让协作更简单。\n\n>>>>>>> feature\n",
+      "during-conflict.txt": "keep this draft"
+    },
+    "index": {
+      "README.md": "# Hello, Git\n\n来自 main：让版本看得见。\n"
+    },
+    "commits": {
+      "__gitMap": [
+        [
+          "f19c74c5",
+          {
+            "hash": "f19c74c5",
+            "parents": [],
+            "message": "创建项目说明",
+            "author": "Git Learner <learner@example.com>",
+            "timestamp": "2026-10-17T02:05:14.499Z",
+            "tree": {
+              "README.md": "# Hello, Git\n\n每一个好项目，都从一次提交开始。\n"
+            },
+            "branch": "main"
+          }
+        ],
+        [
+          "7542f536",
+          {
+            "hash": "7542f536",
+            "parents": [
+              "f19c74c5"
+            ],
+            "message": "feature：添加新想法",
+            "author": "Git Learner <learner@example.com>",
+            "timestamp": "2026-10-17T02:05:14.499Z",
+            "tree": {
+              "README.md": "# Hello, Git\n\n来自 feature：让协作更简单。\n"
+            },
+            "branch": "feature"
+          }
+        ],
+        [
+          "62cc8307",
+          {
+            "hash": "62cc8307",
+            "parents": [
+              "f19c74c5"
+            ],
+            "message": "main：更新项目计划",
+            "author": "Git Learner <learner@example.com>",
+            "timestamp": "2026-10-17T02:05:14.500Z",
+            "tree": {
+              "README.md": "# Hello, Git\n\n来自 main：让版本看得见。\n"
+            },
+            "branch": "main"
+          }
+        ]
+      ]
+    },
+    "refs": {
+      "branches": {
+        "main": "62cc8307",
+        "feature": "7542f536"
+      },
+      "HEAD": {
+        "type": "branch",
+        "name": "main"
+      },
+      "tags": {},
+      "remoteTracking": {}
+    },
+    "remotes": {},
+    "stash": [
+      {
+        "base": {
+          "README.md": "# Hello, Git\n\n来自 main：让版本看得见。\n"
+        },
+        "index": {
+          "README.md": "# Hello, Git\n\n来自 main：让版本看得见。\n"
+        },
+        "workingTree": {
+          "README.md": "# Hello, Git\n\n来自 main：让版本看得见。\n",
+          "legacy-note.txt": "original draft"
+        },
+        "message": "legacy draft",
+        "hash": "62cc8307"
+      }
+    ],
+    "conflicts": [
+      "README.md"
+    ],
+    "merge": {
+      "parents": [
+        "62cc8307",
+        "7542f536"
+      ],
+      "message": "Merge branch 'feature'",
+      "before": {
+        "workingTree": {
+          "README.md": "# Hello, Git\n\n来自 main：让版本看得见。\n"
+        },
+        "index": {
+          "README.md": "# Hello, Git\n\n来自 main：让版本看得见。\n"
+        }
+      }
+    },
+    "operation": null,
+    "reflog": [
+      {
+        "hash": "f19c74c5",
+        "oldHash": null,
+        "branch": "main",
+        "action": "commit: -m 创建项目说明",
+        "timestamp": "2026-10-17T02:05:14.499Z"
+      },
+      {
+        "hash": "f19c74c5",
+        "oldHash": "f19c74c5",
+        "branch": "feature",
+        "action": "switch: -c feature",
+        "timestamp": "2026-10-17T02:05:14.499Z"
+      },
+      {
+        "hash": "7542f536",
+        "oldHash": "f19c74c5",
+        "branch": "feature",
+        "action": "commit: -m feature：添加新想法",
+        "timestamp": "2026-10-17T02:05:14.499Z"
+      },
+      {
+        "hash": "f19c74c5",
+        "oldHash": "7542f536",
+        "branch": "main",
+        "action": "switch: main",
+        "timestamp": "2026-10-17T02:05:14.499Z"
+      },
+      {
+        "hash": "62cc8307",
+        "oldHash": "f19c74c5",
+        "branch": "main",
+        "action": "commit: -m main：更新项目计划",
+        "timestamp": "2026-10-17T02:05:14.500Z"
+      }
+    ],
+    "upstream": {}
+  },
+  "scenario": "conflict",
+  "history": [
+    {
+      "line": "git merge feature",
+      "command": "merge",
+      "output": "legacy conflict",
+      "explanation": "legacy session",
+      "error": false,
+      "time": "2026-10-17T00:00:00.000Z"
+    }
+  ],
+  "progress": {
+    "lessons": [
+      "zones"
+    ],
+    "scenarios": []
+  },
+  "theme": "dark",
+  "done": [],
+  "seen": {},
+  "baseline": 3,
+  "baseReadme": "# Hello, Git\n\n来自 main：让版本看得见。\n",
+  "last": "示例仓库已重置。输入 git status 查看文件状态。"
+}

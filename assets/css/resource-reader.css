@@ -1,0 +1,1320 @@
+    /* Resource library: shared typography, reading rails and terminal code blocks. */
+    .resource-dialog {
+      --resource-code-bg: #172821;
+      --resource-code-top: #1f3329;
+      --resource-code-line: #365043;
+      --resource-code-ink: #dfece2;
+      width: min(1060px, calc(100vw - 32px));
+      max-width: calc(100vw - 32px);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 28px 100px #0c241c35;
+    }
+
+    [data-theme="dark"] .resource-dialog {
+      --resource-code-bg: #111e17;
+      --resource-code-top: #17291e;
+      --resource-code-line: #304b39
+    }
+
+    .resource-dialog .modal-head {
+      min-height: 61px;
+      padding: 14px 22px;
+      background: var(--surface)
+    }
+
+    .resource-dialog .modal-head h2 {
+      font-size: 18px;
+      letter-spacing: -.2px
+    }
+
+    .resource-dialog .modal-head h2 small {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted)
+    }
+
+    .resource-dialog .modal-head button {
+      border-color: var(--line);
+      background: var(--soft);
+      color: var(--muted)
+    }
+
+    .resource-dialog .modal-head button:hover {
+      background: var(--tint);
+      color: var(--accent)
+    }
+
+    .resource-dialog .resource-search {
+      border-radius: 8px;
+      border-color: var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 1px 2px #18352808
+    }
+
+    .resource-dialog .resource-search:focus {
+      border-color: var(--accent)
+    }
+
+    .resource-dialog .eyebrow {
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 1.2px
+    }
+
+    /* A chapter occupies the reader; long content stays accessible without scroll tracks. */
+    #lessons-dialog {
+      width: min(1080px, calc(100vw - 32px));
+      height: min(780px, calc(100dvh - 36px));
+      max-height: calc(100dvh - 36px)
+    }
+
+    #lessons-dialog[open] {
+      display: flex;
+      flex-direction: column
+    }
+
+    #lessons-dialog>.modal-head {
+      flex: none
+    }
+
+    #lessons-dialog>#lessons-panel.lessons-library {
+      display: grid;
+      grid-template-columns: 224px minmax(0, 1fr);
+      flex: 1;
+      min-height: 0;
+      max-height: none;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .lesson-sidebar {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      min-height: 0;
+      padding: 16px 12px 12px;
+      background: var(--soft);
+      border-right: 1px solid var(--line)
+    }
+
+    #lessons-dialog .lesson-sidebar #lesson-search {
+      flex: none;
+      margin: 0 0 10px;
+      padding: 9px 10px;
+      font-size: 12px
+    }
+
+    .lesson-sidebar .lesson-count,
+    .lesson-sidebar .resource-count {
+      padding: 0 9px 9px;
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    #lessons-dialog .lesson-tabs {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      gap: 4px;
+      border: 0;
+      padding: 2px 2px 4px;
+      overflow: auto;
+      scrollbar-width: none
+    }
+
+    #lessons-dialog .lesson-tabs::-webkit-scrollbar {
+      display: none
+    }
+
+    #lessons-dialog .lesson-tab {
+      flex: none;
+      min-height: 37px;
+      padding: 8px 10px;
+      border-radius: 7px;
+      line-height: 1.5;
+      color: var(--muted);
+      font-size: 12px
+    }
+
+    #lessons-dialog .lesson-tab:hover {
+      background: var(--surface);
+      color: var(--ink)
+    }
+
+    #lessons-dialog .lesson-tab.active {
+      color: var(--accent);
+      background: var(--tint);
+      border-color: color-mix(in srgb, var(--accent) 22%, var(--line));
+      box-shadow: inset 3px 0 var(--accent)
+    }
+
+    #lessons-dialog .lesson-tab b {
+      font-size: 11px
+    }
+
+    #lessons-dialog #lessons {
+      min-width: 0;
+      min-height: 0;
+      max-height: none;
+      padding: 25px 30px 28px;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: none;
+    }
+
+    #lessons-dialog #lessons::-webkit-scrollbar {
+      display: none
+    }
+
+    #lessons-dialog .lesson-article {
+      max-width: 820px;
+      min-width: 0;
+      margin: 0 auto;
+      padding: 0
+    }
+
+    #lessons-dialog .lesson-article-head {
+      padding-bottom: 18px;
+      margin-bottom: 19px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    #lessons-dialog .lesson-article-head .eyebrow {
+      display: block;
+      margin-bottom: 7px
+    }
+
+    #lessons-dialog .lesson-article h3 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: 25px;
+      line-height: 1.4;
+      letter-spacing: -.45px
+    }
+
+    #lessons-dialog .lesson-lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9
+    }
+
+    #lessons-dialog .lesson-sections {
+      display: grid;
+      gap: 17px
+    }
+
+    #lessons-dialog .lesson-section {
+      min-width: 0
+    }
+
+    #lessons-dialog .lesson-section h4 {
+      margin: 0 0 7px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.6
+    }
+
+    #lessons-dialog .lesson-section p,
+    #lessons-dialog .lesson-section li {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+      white-space: pre-line
+    }
+
+    #lessons-dialog .lesson-section ul,
+    #lessons-dialog .lesson-section ol {
+      margin: 0;
+      padding-left: 20px
+    }
+
+    #lessons-dialog .lesson-section li+li {
+      margin-top: 5px
+    }
+
+    #lessons-dialog .lesson-section code:not(.resource-code code) {
+      padding: 2px 5px;
+      border: 1px solid color-mix(in srgb, var(--accent) 10%, var(--line));
+      border-radius: 4px;
+      background: var(--soft);
+      color: var(--accent);
+      font: 11.5px/1.7 var(--mono)
+    }
+
+    #lessons-dialog .lesson-zone-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin: 17px 0 19px
+    }
+
+    #lessons-dialog .lesson-zone-flow>div,
+    #lessons-dialog .lesson-zone-flow>span {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      min-height: 68px;
+      padding: 11px 10px;
+      border: 1px solid var(--line);
+      border-top: 2px solid var(--accent);
+      border-radius: 7px;
+      background: var(--soft);
+      font-size: 12px;
+      color: var(--ink);
+    }
+
+    #lessons-dialog .lesson-zone-flow>div:nth-child(1) {
+      border-top-color: var(--orange)
+    }
+
+    #lessons-dialog .lesson-zone-flow>div:nth-child(2) {
+      border-top-color: var(--gold)
+    }
+
+    #lessons-dialog .lesson-zone-flow>div:nth-child(4) {
+      border-top-color: var(--purple)
+    }
+
+    #lessons-dialog .lesson-zone-flow strong {
+      font-size: 12px;
+      color: var(--ink)
+    }
+
+    #lessons-dialog .lesson-zone-flow small {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    #lessons-dialog .lesson-note {
+      margin: 16px 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    #lessons-dialog .lesson-note strong {
+      color: var(--ink)
+    }
+
+    #lessons-dialog .lesson-article>h4 {
+      margin: 22px 0 9px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 650
+    }
+
+    #lessons-dialog .lesson-commands {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 18px 0
+    }
+
+    #lessons-dialog .lesson-commands .command-chip {
+      min-height: 37px;
+      padding: 9px 12px;
+      text-align: left;
+      font: 12px/1.6 var(--mono);
+      background: var(--soft);
+      color: var(--accent);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere
+    }
+
+    #lessons-dialog .lesson-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 17px;
+      border-top: 1px solid var(--line)
+    }
+
+    #lessons-dialog .lesson-footer .learned,
+    #lessons-dialog .lesson-article>.learned {
+      min-height: 33px;
+      padding: 6px 12px;
+      border-radius: 7px;
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+      background: var(--tint);
+      font-size: 12px
+    }
+
+    #lessons-dialog .lesson-footer small {
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    #lesson-progress {
+      font-size: 10px;
+      padding: 3px 6px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--soft)
+    }
+
+    /* Shared code blocks carry syntax colors in both themes. */
+    :is(.resource-dialog, .repository-info-dialog) .resource-code-card,
+    :is(.resource-dialog, .repository-info-dialog) .lesson-code-block {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--resource-code-line);
+      border-radius: 8px;
+      background: var(--resource-code-bg);
+      color: var(--resource-code-ink);
+      --syntax-git: #9eddac;
+      --syntax-subcommand: #91cfeb;
+      --syntax-flag: #d0b6f5;
+      --syntax-string: #e6c486;
+      --syntax-argument: #cfddd1;
+      --output-added: #9eddac;
+      --output-removed: #ffaaa2;
+      --output-meta: #91cfeb;
+      --output-changed: #e6c486;
+      --output-error: #ffaaa2;
+    }
+
+    :is(.resource-dialog, .repository-info-dialog) .resource-code-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 34px;
+      padding: 6px 12px;
+      border-bottom: 1px solid var(--resource-code-line);
+      background: var(--resource-code-top);
+      color: #a5bdae;
+      font: 10px/1.5 var(--mono)
+    }
+
+    :is(.resource-dialog, .repository-info-dialog) .resource-code-head>span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      letter-spacing: .4px
+    }
+
+    :is(.resource-dialog, .repository-info-dialog) .resource-code-head button {
+      flex: none;
+      min-height: 23px;
+      padding: 3px 7px;
+      border: 1px solid #4d6957;
+      border-radius: 5px;
+      background: transparent;
+      color: #c6ddcb;
+      font: 10px/1.4 "Segoe UI", "Microsoft YaHei", sans-serif
+    }
+
+    :is(.resource-dialog, .repository-info-dialog) .resource-code-head button:hover {
+      border-color: #87b494;
+      background: #2a4935;
+      color: #edf8ec
+    }
+
+    :is(.resource-dialog, .repository-info-dialog) pre.resource-code {
+      margin: 0;
+      min-width: 0;
+      padding: 13px 14px;
+      border: 0;
+      border-radius: 0;
+      background: var(--resource-code-bg);
+      color: var(--resource-code-ink);
+      font: 12px/1.85 var(--mono);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere
+    }
+
+    :is(.resource-dialog, .repository-info-dialog) pre.resource-code>code {
+      padding: 0;
+      border: 0;
+      background: none;
+      font: inherit;
+      color: inherit
+    }
+
+    :is(.resource-dialog, .repository-info-dialog) .lesson-code-block+.lesson-code-block {
+      margin-top: 9px
+    }
+
+    /* Reference rail and structured articles. */
+    #reference-dialog {
+      width: min(1060px, calc(100vw - 32px));
+      height: min(780px, calc(100dvh - 36px));
+      max-height: calc(100dvh - 36px)
+    }
+
+    #reference-dialog>.modal-head {
+      padding: 13px 22px
+    }
+
+    #reference-dialog .reference-dialog-caption {
+      margin-top: 3px;
+      font-size: 11px
+    }
+
+    #reference-dialog>#reference-panel {
+      grid-template-columns: 236px minmax(0, 1fr);
+      height: auto
+    }
+
+    #reference-dialog .reference-sidebar {
+      width: auto;
+      padding: 16px 12px 12px;
+      background: var(--soft)
+    }
+
+    #reference-dialog #reference-search {
+      margin-bottom: 9px;
+      padding: 9px 10px
+    }
+
+    #reference-dialog #reference-count {
+      padding: 2px 8px 8px;
+      font-size: 10px
+    }
+
+    #reference-dialog #reference-chips {
+      gap: 4px;
+      padding: 1px 2px 4px;
+      scrollbar-width: none
+    }
+
+    #reference-dialog #reference-chips::-webkit-scrollbar {
+      display: none
+    }
+
+    #reference-dialog #reference-chips .ref-command {
+      min-height: 54px;
+      padding: 9px 10px;
+      border-radius: 7px
+    }
+
+    #reference-dialog #reference-chips .ref-command strong {
+      font-size: 12px
+    }
+
+    #reference-dialog #reference-chips .ref-command small {
+      font-size: 10px;
+      line-height: 1.5
+    }
+
+    #reference-dialog #reference-content {
+      padding: 24px 30px 28px;
+      background: var(--surface);
+      scrollbar-width: none
+    }
+
+    #reference-dialog #reference-content::-webkit-scrollbar {
+      display: none
+    }
+
+    #reference-dialog #reference-content .reference-article-head {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    #reference-dialog #reference-content h3 {
+      margin: 4px 0 7px;
+      color: var(--ink);
+      font-size: 27px;
+      line-height: 1.35
+    }
+
+    #reference-dialog #reference-content .reference-lead {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.85
+    }
+
+    #reference-dialog #reference-content .reference-section {
+      margin-top: 21px
+    }
+
+    #reference-dialog #reference-content h4 {
+      margin: 0 0 9px;
+      color: var(--ink);
+      font-size: 12px;
+      letter-spacing: .1px
+    }
+
+    #reference-dialog #reference-content h4 span {
+      font-size: 10px;
+      letter-spacing: 0
+    }
+
+    #reference-dialog #reference-content .reference-syntax {
+      margin: 0;
+      padding: 14px 15px;
+      border: 1px solid var(--resource-code-line);
+      border-radius: 8px;
+      background: var(--resource-code-bg);
+      color: var(--resource-code-ink);
+      font: 12px/1.85 var(--mono);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      --syntax-git: #9eddac;
+      --syntax-subcommand: #91cfeb;
+      --syntax-flag: #d0b6f5;
+      --syntax-string: #e6c486;
+      --syntax-argument: #cfddd1;
+    }
+
+    #reference-dialog #reference-content .reference-syntax code {
+      font: inherit;
+      color: inherit
+    }
+
+    #reference-dialog #reference-content .reference-prose p {
+      margin: 0 0 11px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9
+    }
+
+    #reference-dialog #reference-content .reference-prose p:last-child {
+      margin-bottom: 0
+    }
+
+    #reference-dialog #reference-content .reference-example-list {
+      gap: 13px
+    }
+
+    #reference-dialog #reference-content article.reference-example {
+      display: block;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: none
+    }
+
+    #reference-dialog #reference-content article.reference-example h5 {
+      margin: 0 0 4px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.7
+    }
+
+    #reference-dialog #reference-content article.reference-example>p {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8
+    }
+
+    #reference-dialog #reference-content .reference-example pre.resource-code {
+      padding: 12px 14px
+    }
+
+    #reference-dialog #reference-content .reference-example pre.resource-code code {
+      font: 12px/1.85 var(--mono);
+      color: inherit
+    }
+
+    #reference-dialog #reference-content .reference-example pre.resource-code code span {
+      float: none;
+      margin: 0
+    }
+
+    #reference-dialog #reference-content .reference-notes {
+      gap: 10px;
+      padding-top: 18px
+    }
+
+    #reference-dialog #reference-content .reference-notes>div {
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft)
+    }
+
+    #reference-dialog #reference-content .reference-notes>div:first-child {
+      border-top: 2px solid var(--gold)
+    }
+
+    #reference-dialog #reference-content .reference-notes>div:last-child {
+      border-top: 2px solid var(--accent)
+    }
+
+    #reference-dialog #reference-content .reference-notes p {
+      padding: 0;
+      border: 0;
+      background: none;
+      font-size: 12px;
+      line-height: 1.85
+    }
+
+    /* History reads like an execution report with two clear code panels. */
+    #history-dialog {
+      width: min(1020px, calc(100vw - 32px));
+      height: min(740px, calc(100dvh - 36px));
+      max-height: calc(100dvh - 36px)
+    }
+
+    #history-dialog>.history-browser {
+      grid-template-columns: 276px minmax(0, 1fr)
+    }
+
+    #history-dialog .history-sidebar {
+      width: auto;
+      padding: 16px 12px 12px;
+      background: var(--soft)
+    }
+
+    #history-dialog .history-sidebar .resource-search {
+      margin: 0 0 11px;
+      padding: 9px 10px
+    }
+
+    #history-dialog .history-sidebar-label {
+      margin: 0 4px 9px;
+      font-size: 10px
+    }
+
+    #history-dialog .history-list {
+      gap: 5px;
+      padding: 2px 2px 5px;
+      scrollbar-width: none;
+      scrollbar-gutter: auto
+    }
+
+    #history-dialog .history-list::-webkit-scrollbar {
+      display: none
+    }
+
+    #history-dialog .history-record {
+      min-height: 68px;
+      padding: 10px;
+      border-radius: 7px
+    }
+
+    #history-dialog .history-record-command {
+      font-size: 11px;
+      line-height: 1.65
+    }
+
+    #history-dialog .history-record-meta {
+      font-size: 10px
+    }
+
+    #history-dialog .history-detail {
+      padding: 24px 28px 28px;
+      scrollbar-width: none;
+      scrollbar-gutter: auto
+    }
+
+    #history-dialog .history-detail::-webkit-scrollbar {
+      display: none
+    }
+
+    #history-dialog .history-detail>header {
+      padding-bottom: 17px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    #history-dialog .history-detail-head {
+      margin-bottom: 8px
+    }
+
+    #history-dialog .history-detail h3 {
+      margin: 0 0 6px;
+      font-size: 23px;
+      line-height: 1.4
+    }
+
+    #history-dialog .history-detail-date {
+      font-size: 11px
+    }
+
+    #history-dialog .history-detail-section {
+      padding-top: 20px
+    }
+
+    #history-dialog .history-detail-section h4 {
+      margin: 0 0 9px;
+      color: var(--ink);
+      font-size: 12px
+    }
+
+    #history-dialog .history-detail-command,
+    #history-dialog .history-detail-output {
+      margin: 0;
+      padding: 14px 15px;
+      border: 1px solid var(--resource-code-line);
+      border-radius: 8px;
+      background: var(--resource-code-bg);
+      color: var(--resource-code-ink);
+      font: 12px/1.85 var(--mono);
+      --syntax-git: #9eddac;
+      --syntax-subcommand: #91cfeb;
+      --syntax-flag: #d0b6f5;
+      --syntax-string: #e6c486;
+      --syntax-argument: #cfddd1;
+      --output-added: #9eddac;
+      --output-removed: #ffaaa2;
+      --output-meta: #91cfeb;
+      --output-changed: #e6c486;
+      --output-error: #ffaaa2;
+    }
+
+    #history-dialog .resource-code-card .history-detail-command,
+    #history-dialog .resource-code-card .history-detail-output {
+      border: 0;
+      border-radius: 0
+    }
+
+    #history-dialog .history-detail-command code,
+    #history-dialog .history-detail-output code {
+      font: inherit
+    }
+
+    #history-dialog .history-detail-output.failed {
+      box-shadow: inset 3px 0 var(--danger)
+    }
+
+    #history-dialog .history-explanation {
+      margin: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9
+    }
+
+    #history-dialog .history-detail-actions {
+      margin-top: 10px;
+      gap: 7px
+    }
+
+    #history-dialog .history-detail-actions button {
+      min-height: 32px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11px
+    }
+
+    #history-dialog .history-detail-actions button[data-replay] {
+      background: var(--tint);
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 28%, var(--line))
+    }
+
+    #history-dialog .history-detail-actions small {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    #history-dialog .history-empty {
+      min-height: 100%;
+      gap: 10px
+    }
+
+    #history-dialog .history-empty h3 {
+      font-size: 22px
+    }
+
+    /* Mobile navigation becomes a horizontal rail while the article keeps all content. */
+    @media(max-width:700px) {
+
+      #lessons-dialog,
+      #reference-dialog,
+      #history-dialog {
+        width: calc(100vw - 16px);
+        max-width: calc(100vw - 16px);
+        height: calc(100dvh - 20px);
+        max-height: calc(100dvh - 20px);
+        border-radius: 12px
+      }
+
+      .resource-dialog .modal-head,
+      #reference-dialog>.modal-head {
+        min-height: 58px;
+        padding: 12px 15px
+      }
+
+      .resource-dialog .modal-head h2 {
+        font-size: 17px
+      }
+
+      #lessons-dialog>#lessons-panel.lessons-library {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr)
+      }
+
+      #lessons-dialog .lesson-sidebar {
+        padding: 11px 11px 7px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line)
+      }
+
+      #lessons-dialog .lesson-sidebar #lesson-search {
+        font-size: 16px;
+        padding: 7px 9px;
+        margin-bottom: 7px
+      }
+
+      .lesson-sidebar .lesson-count,
+      .lesson-sidebar .resource-count {
+        display: none
+      }
+
+      #lessons-dialog .lesson-tabs {
+        flex-direction: row;
+        flex: none;
+        gap: 5px;
+        padding: 2px 1px 4px;
+        overflow-x: auto;
+        overflow-y: hidden
+      }
+
+      #lessons-dialog .lesson-tab {
+        width: auto;
+        flex: none;
+        min-height: 35px;
+        padding: 7px 10px;
+        font-size: 11px;
+        white-space: nowrap
+      }
+
+      #lessons-dialog .lesson-tab.active {
+        box-shadow: inset 0 -2px var(--accent)
+      }
+
+      #lessons-dialog #lessons {
+        padding: 20px 17px 23px
+      }
+
+      #lessons-dialog .lesson-article h3 {
+        font-size: 23px
+      }
+
+      #lessons-dialog .lesson-article-head {
+        margin-bottom: 16px;
+        padding-bottom: 16px
+      }
+
+      #lessons-dialog .lesson-sections {
+        gap: 16px
+      }
+
+      #lessons-dialog .lesson-zone-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      #lessons-dialog .lesson-zone-flow>div {
+        min-height: 64px
+      }
+
+      #reference-dialog>#reference-panel {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr)
+      }
+
+      #reference-dialog .reference-sidebar {
+        padding: 11px 11px 7px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line)
+      }
+
+      #reference-dialog #reference-search {
+        font-size: 16px;
+        padding: 7px 9px;
+        margin-bottom: 7px
+      }
+
+      #reference-dialog #reference-count {
+        display: none
+      }
+
+      #reference-dialog #reference-chips {
+        flex-direction: row;
+        flex: none;
+        gap: 6px;
+        padding: 2px 1px 4px;
+        overflow-x: auto;
+        overflow-y: hidden
+      }
+
+      #reference-dialog #reference-chips .ref-command {
+        width: 151px;
+        min-height: 55px;
+        padding: 8px 10px
+      }
+
+      #reference-dialog #reference-content {
+        padding: 20px 17px 23px
+      }
+
+      #reference-dialog #reference-content h3 {
+        font-size: 24px
+      }
+
+      #reference-dialog #reference-content .reference-notes {
+        grid-template-columns: minmax(0, 1fr)
+      }
+
+      #history-dialog>.history-browser {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr)
+      }
+
+      #history-dialog .history-sidebar {
+        padding: 11px 11px 7px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line)
+      }
+
+      #history-dialog .history-sidebar .resource-search {
+        font-size: 16px;
+        padding: 7px 9px;
+        margin-bottom: 7px
+      }
+
+      #history-dialog .history-sidebar-label {
+        display: none
+      }
+
+      #history-dialog .history-list {
+        flex-direction: row;
+        flex: none;
+        gap: 6px;
+        padding: 2px 1px 4px;
+        overflow-x: auto;
+        overflow-y: hidden
+      }
+
+      #history-dialog .history-record {
+        flex: none;
+        width: 205px;
+        min-height: 63px;
+        padding: 9px 10px
+      }
+
+      #history-dialog .history-detail {
+        padding: 20px 17px 23px
+      }
+
+      #history-dialog .history-detail h3 {
+        font-size: 21px
+      }
+
+      #history-dialog .history-detail-actions small {
+        flex-basis: 100%
+      }
+
+      .resource-dialog pre.resource-code,
+      #history-dialog .history-detail-command,
+      #history-dialog .history-detail-output {
+        font-size: 11.5px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .resource-dialog * {
+        transition: none !important
+      }
+    }
+
+    /* Structured article details supplied by the resource renderer. */
+    .resource-dialog .modal-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6
+    }
+
+    #lessons-dialog .lesson-tab {
+      justify-content: flex-start;
+      gap: 9px
+    }
+
+    #lessons-dialog .lesson-tab-number {
+      flex: none;
+      width: 18px;
+      font: 10px/1.5 var(--mono);
+      opacity: .65
+    }
+
+    #lessons-dialog .lesson-tab-title {
+      flex: 1;
+      text-align: left;
+      min-width: 0
+    }
+
+    #lessons-dialog .lesson-section h4 {
+      display: flex;
+      align-items: baseline;
+      gap: 9px
+    }
+
+    #lessons-dialog .lesson-section-number {
+      flex: none;
+      font: 10px/1.6 var(--mono);
+      color: var(--accent);
+      opacity: .75
+    }
+
+    #lessons-dialog .lesson-practice {
+      margin-top: 25px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line)
+    }
+
+    #lessons-dialog .lesson-practice-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 9px;
+      margin-bottom: 12px
+    }
+
+    #lessons-dialog .lesson-practice-head h4 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 13px
+    }
+
+    #lessons-dialog .lesson-practice-head>span {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    #lessons-dialog .lesson-commands {
+      margin: 0;
+      gap: 14px
+    }
+
+    #lessons-dialog .lesson-code-block {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--ink)
+    }
+
+    #lessons-dialog .lesson-code-block+.lesson-code-block {
+      margin: 0
+    }
+
+    #lessons-dialog .lesson-code-block h5 {
+      margin: 0 0 7px;
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.7;
+      font-weight: 550
+    }
+
+    #lessons-dialog .lesson-footer>span {
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    #lessons-dialog .lesson-note p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9
+    }
+
+    #lessons-dialog .lesson-zone-step>span {
+      font: 10px/1.5 var(--mono);
+      color: var(--muted)
+    }
+
+    #reference-dialog #reference-content .resource-code-card>.reference-syntax {
+      border: 0;
+      border-radius: 0
+    }
+
+    #reference-dialog #reference-content .reference-notes>div h4 {
+      font-size: 12px
+    }
+
+    @media(max-width:700px) {
+      #lessons-dialog .lesson-tab-number {
+        width: auto;
+        font-size: 9px
+      }
+
+      #lessons-dialog .lesson-tab {
+        gap: 6px
+      }
+
+      #lessons-dialog .lesson-practice-head {
+        align-items: baseline
+      }
+
+      #lessons-dialog .lesson-practice-head>span {
+        font-size: 9px
+      }
+    }
+
+    #lessons-dialog #lesson-count {
+      flex: none;
+      display: block;
+      padding: 0 9px 9px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6
+    }
+
+    @media(max-width:700px) {
+      #lessons-dialog #lesson-count {
+        display: none
+      }
+    }
+
+    /* Keep syntax tokens colored inside reference examples as well as syntax blocks. */
+    #reference-content .reference-example pre code .syntax-git {
+      color: var(--syntax-git)
+    }
+
+    #reference-content .reference-example pre code .syntax-subcommand {
+      color: var(--syntax-subcommand)
+    }
+
+    #reference-content .reference-example pre code .syntax-flag {
+      color: var(--syntax-flag)
+    }
+
+    #reference-content .reference-example pre code .syntax-string {
+      color: var(--syntax-string)
+    }
+
+    #reference-content .reference-example pre code .syntax-argument {
+      color: var(--syntax-argument)
+    }
+
+    .resource-dialog .inline-command {
+      padding: 1px 4px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--soft);
+      color: var(--accent);
+      font: 11.5px/1.8 var(--mono);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      overflow-wrap: anywhere
+    }
+
+    /* Tighten the main canvas while keeping the graph and terminal distinct. */
+    .app {
+      padding-top: 10px !important;
+      padding-bottom: 10px !important
+    }
+
+    .main-column {
+      gap: 10px !important
+    }
+
+    .workbench-bottom {
+      padding: 6px 14px !important
+    }
+
+    .legend {
+      gap: 7px !important
+    }
+
+    .console-group {
+      gap: 14px !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important
+    }
+
+    .console-group>.graph-panel,
+    .console-group>.terminal {
+      border: 1px solid var(--line) !important;
+      border-radius: 12px !important;
+      box-shadow: var(--shadow) !important;
+      overflow: hidden
+    }
+
+    .console-group>.graph-panel {
+      border-right: 1px solid var(--line) !important
+    }
+
+    .console-group>.terminal {
+      border-left: 1px solid #39493e !important
+    }
+
+    .console-group>.graph-panel>.panel-head,
+    .console-group>.terminal>.panel-head {
+      height: 46px !important;
+      min-height: 46px !important
+    }
+
+    .graph-wrap {
+      background-size: 14px 14px !important
+    }
+
+    @media(min-width:981px) and (min-height:640px) {
+      .app {
+        padding-left: 16px !important;
+        padding-right: 16px !important
+      }
+
+      .app-header {
+        padding-left: 16px;
+        padding-right: 16px
+      }
+
+      .main-column {
+        grid-template-rows: minmax(220px, .9fr) minmax(280px, 1.1fr) !important
+      }
+
+      .console-group {
+        gap: 14px !important
+      }
+
+      .terminal-output {
+        padding-left: 14px !important;
+        padding-right: 14px !important
+      }
+    }
+
+    @media(max-width:780px) {
+      .app {
+        padding: 10px 10px 120px !important
+      }
+
+      .main-column {
+        gap: 10px !important
+      }
+
+      .console-group {
+        gap: 10px !important
+      }
+
+      .console-group>.graph-panel,
+      .console-group>.terminal {
+        border-radius: 10px !important
+      }
+
+      .workbench-bottom {
+        padding: 7px 10px !important
+      }
+    }
+
